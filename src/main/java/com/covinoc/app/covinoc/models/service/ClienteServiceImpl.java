@@ -61,6 +61,7 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteDao.existsByEmail(email);
     }
 
+
     public ResponseEntity<Cliente> actualizarCliente(Optional<Cliente> cliente) {
         if (cliente.isPresent()) {
             Cliente clienteDb = cliente.get();

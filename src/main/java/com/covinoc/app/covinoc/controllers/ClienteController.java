@@ -28,7 +28,7 @@ public class ClienteController {
     public Map<String, List<Cliente>> listar() {
         try {
             return Collections.singletonMap("clientes", clienteService.listar());
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new ListarClientesException("Error al listar clientes", e);
         }
@@ -83,7 +83,25 @@ public class ClienteController {
         }
     }
 
+    @PatchMapping("/deshabilitado/{id}/{estado}")
+    public ResponseEntity<?> cambiarEstado(@PathVariable Long id,@PathVariable String estado) {
+        try {
 
+          Optional<Cliente> cliente = clienteService.porId(id);
+          Cliente cliente1;
+            if (cliente != null) {
+                cliente.get().setEstado(estado);
+                cliente1 = cliente.get();
+
+
+                clienteService.guardar(cliente1);
+            }
+
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            throw new EditarClienteException("Error al editar el estado del  cliente", e);
+        }
+    }
 
 
     private ResponseEntity<Map<String, String>> validar(BindingResult result) {
