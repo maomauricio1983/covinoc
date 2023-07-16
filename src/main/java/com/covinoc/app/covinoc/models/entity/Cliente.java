@@ -2,12 +2,15 @@ package com.covinoc.app.covinoc.models.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+
+@Entity
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,12 @@ public class Cliente {
     @NotEmpty
     @Email
     private String email;
+
+    @NotBlank
+    private String password;
+
+    @NotBlank
+    private String estado;
 
     @NotNull
     @Column(name = "create_at")
@@ -71,6 +80,23 @@ public class Cliente {
 
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     private static final long serialVersionUID = 1L;
