@@ -75,7 +75,7 @@ public class ClienteController {
             }
 
             Optional<Cliente> o = clienteService.porId(id);
-            ResponseEntity<?> mensaje = clienteService.actualizarCliente(o);
+            ResponseEntity<?> mensaje = clienteService.actualizarCliente(Optional.ofNullable(cliente));
             if (mensaje != null) return mensaje;
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
